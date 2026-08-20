@@ -1,0 +1,749 @@
+@charset "UTF-8";
+/*!
+Theme Name: Fleurs d'oranger & Chats errants
+Theme URI: http://underscores.me/
+Author: MyCustomWP
+Author URI: http://underscores.me/
+Description: Thème du film d'animation Fleurs d'orangers et charts errants du studio Koukaki
+Version: 1.0.0
+Tested up to: 5.4
+Requires PHP: 5.6
+License: GNU General Public License v2 or later
+License URI: LICENSE
+Text Domain: foce
+Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready
+
+This theme, like WordPress, is licensed under the GPL.
+Use it to make something cool, have fun, and share what you've learned.
+
+Fleurs d'oranger & Chats errants is based on Underscores https://underscores.me/, (C) 2012-2020 Automattic, Inc.
+Underscores is distributed under the terms of the GNU GPL v2 or later.
+
+Normalizing styles have been helped along thanks to the fine work of
+Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
+*/
+/*--------------------------------------------------------------
+>>> TABLE OF CONTENTS:
+----------------------------------------------------------------
+# Generic
+	- Normalize
+	- Box sizing
+# Base
+	- Typography
+	- Elements
+	- Links
+	- Forms
+## Layouts
+# Components
+	- Navigation
+	- Posts and pages
+	- Comments
+	- Widgets
+	- Media
+	- Captions
+	- Galleries
+# plugins
+	- Jetpack infinite scroll
+# Utilities
+	- Accessibility
+	- Alignments
+
+--------------------------------------------------------------*/
+/*--------------------------------------------------------------
+# Layouts
+--------------------------------------------------------------*/
+:root {
+  --rotateTime: 45s;
+}
+
+@keyframes rotating {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+/*_________________________menu*/
+.main-navigation {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  min-height: 80px;
+  padding: 0 clamp(1rem, 3vw, 2rem);
+}
+.main-navigation .site-title {
+  grid-column: 2;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.burgerMenu {
+  position: absolute;
+  right: clamp(1rem, 3vw, 2rem);
+  top: 50%;
+  transform: translateY(-50%);
+}
+.burgerMenu.active .line:nth-child(1) {
+  transform: translateY(5px) rotate(45deg);
+}
+.burgerMenu.active .line:nth-child(2) {
+  transform: rotate(-45deg);
+}
+.burgerMenu.active .line:nth-child(3) {
+  opacity: 0;
+}
+
+.fullScreenMenu {
+  display: none;
+  position: absolute;
+  top: 80px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #FFF5E9;
+  height: calc(100vh - 80px);
+  max-height: 900px;
+  overflow: hidden;
+}
+.fullScreenMenu.open {
+  display: block;
+}
+
+/*toggle du menu*/
+.fullMenu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.fullMenu img {
+  width: min(170px, 42vw) !important;
+  margin-top: clamp(16px, 3vh, 28px);
+  margin-bottom: clamp(18px, 4vh, 40px);
+  filter: drop-shadow(0 0 0.4rem #DC8433);
+}
+.fullMenu p {
+  font-family: "roboto mono";
+  font-size: 18px;
+  font-weight: 400;
+  text-align: center;
+  text-transform: uppercase;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+/*syntaxe navigation du thème parent*/
+.main-navigation ul {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  position: relative;
+  z-index: 3;
+}
+.main-navigation ul a {
+  z-index: 3;
+  font-size: clamp(2.4rem, 6vw, 4.5rem);
+  line-height: 1.85;
+}
+@keyframes fadeInSlideDoubleUp {
+  from {
+    opacity: 0;
+    transform: translateY(200px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.main-navigation ul a {
+  animation: fadeInSlideDoubleUp ease 2s;
+}
+.main-navigation ul a:hover {
+  text-shadow: rgb(255, 130.550295858, 16) 0px 0px 18px;
+}
+
+@keyframes fadeInSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-80px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.fadeInDown {
+  animation: fadeInSlideDown ease 2s;
+}
+
+.fadeOut {
+  animation: fadeOut ease 2s;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(80);
+  }
+}
+/* les arrières plans du menu*/
+.flowersMenu .orchid {
+  position: absolute;
+  top: 10%;
+  right: 0;
+  bottom: 0;
+  left: -5%;
+}
+.flowersMenu .sunflower {
+  position: absolute;
+  top: 12%;
+  right: 0;
+  bottom: 0;
+  left: 78%;
+  filter: drop-shadow(0 0 0.15rem rgb(255, 221.8181818182, 182));
+  scale: 1.3;
+}
+.flowersMenu .randomFlower {
+  position: absolute;
+  top: 35%;
+  right: 0;
+  bottom: 0;
+  left: 93%;
+  scale: 0.5;
+}
+.flowersMenu .flower {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  bottom: 0;
+  left: 13%;
+  scale: 0.7;
+}
+.flowersMenu .hibiscus {
+  position: absolute;
+  top: 66%;
+  right: 0;
+  bottom: 0;
+  left: 77%;
+  animation: rotating 90s linear infinite;
+}
+.flowersMenu img {
+  animation: rotating 60s linear infinite;
+  line-height: 0px;
+  transform-origin: center;
+}
+
+.catsMenu .Kawaneko {
+  position: absolute;
+  top: 18%;
+  right: 0;
+  bottom: 0;
+  left: 20%;
+  z-index: 2;
+  background: transparent;
+  display: block;
+}
+.catsMenu .Jaakuna {
+  position: absolute;
+  top: 55%;
+  right: 0;
+  bottom: 0;
+  left: 75%;
+  animation-delay: 1s;
+}
+.catsMenu .Orenjiiro {
+  position: absolute;
+  top: 80%;
+  right: 0;
+  bottom: 0;
+  left: 7%;
+  animation-delay: 2s;
+}
+.catsMenu img {
+  width: 170px;
+  height: auto;
+  animation: floating 3s ease-in-out 0s infinite;
+}
+
+h3 {
+  text-shadow: #DC8433 1px 1px 10px;
+}
+
+/* =========================
+   TITRES DE SECTIONS (uniformisés)
+========================= */
+html.js .section-title > span {
+  opacity: 0;
+  transform: translate3d(0, 14px, 0);
+  transition: opacity 700ms cubic-bezier(0.22, 1, 0.36, 1), transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+html.js .section-title.is-inview > span {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition-delay: 180ms;
+}
+
+/*_______________________FADE IN sections*/
+@keyframes fadeInSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.banner,
+.site p {
+  animation: fadeInSlideDown ease 2s;
+}
+
+@keyframes fadeInSlideDoubleUp {
+  from {
+    opacity: 0;
+    transform: translateY(200px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.fadeInDbUp,
+.banner .logo img {
+  animation: fadeInSlideDoubleUp ease 2s;
+}
+
+/* Fade-in des sections au chargement (demandé par le brief) */
+html.js .site-main > section {
+  opacity: 0;
+  transform: translate3d(0, 24px, 0);
+}
+
+html.js.is-loaded .site-main > section {
+  animation: sectionIn 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+html.js.is-loaded .site-main > section:nth-of-type(1) {
+  animation-delay: 0ms;
+}
+
+html.js.is-loaded .site-main > section:nth-of-type(2) {
+  animation-delay: 140ms;
+}
+
+html.js.is-loaded .site-main > section:nth-of-type(3) {
+  animation-delay: 280ms;
+}
+
+html.js.is-loaded .site-main > section:nth-of-type(4) {
+  animation-delay: 420ms;
+}
+
+@keyframes sectionIn {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html.js .site-main > section {
+    opacity: 1;
+    transform: none;
+  }
+  html.js.is-loaded .site-main > section {
+    animation: none;
+  }
+}
+/* ___________________FLOWERS*/
+#studio {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding-top: clamp(3rem, 6vw, 5rem);
+  padding-bottom: clamp(2rem, 5vw, 4rem);
+}
+#studio h2 {
+  justify-content: center;
+  display: flex;
+}
+
+/* Grande fleur violette en bas à droite (coupée au bord, comme maquette) 
+#studio::after{
+    content: "";
+    position: absolute;
+    right: -85px;
+    bottom: -85px;
+    width: 170px;
+    height: 170px;
+    background: url("../assets/VideoImage/random_flower.png") no-repeat center / contain;
+    pointer-events: none;
+    z-index: 0;
+    @include rotate_infinite (var(--rotateTime)) ;
+    transform-origin: center;
+}
+*/
+#studio {
+  position: relative;
+}
+
+#studio > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Fleurs de Studio : coupées verticalement sur les bords (comme maquette) */
+#studio h2 {
+  position: relative;
+  overflow: hidden; /* coupe les pseudo-éléments au bord du bloc */
+}
+
+#studio h2::before {
+  left: -102px; /* ~ 203px / 2 */
+  top: 0;
+}
+
+#studio h2::after {
+  right: 12px; /* entièrement visible (comme maquette) */
+  top: 1.2em;
+}
+
+/*contraste background/fleurs blanches*/
+.story h2::after,
+#event::before,
+.site-footer::before {
+  filter: drop-shadow(0 0 0.15rem rgb(255, 221.8181818182, 182));
+}
+
+/*_________________ rotate flowers*/
+.story h2::after,
+.story__article::after,
+#studio h2::before,
+#studio h2::after,
+.site-footer::before,
+.site-footer::after {
+  animation: rotating var(--rotateTime) linear infinite;
+  line-height: 0px;
+  transform-origin: center;
+}
+
+.site-footer ul::after {
+  animation: rotating 80s linear infinite;
+}
+
+.story h2 {
+  display: flex;
+  justify-content: center;
+}
+
+/*_________________________Banner | video*/
+.banner {
+  position: relative;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.background-video {
+  -o-object-fit: cover;
+     object-fit: cover;
+  position: relative;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  list-style: fallback-video;
+  display: none;
+}
+
+@counter-style fallback-video {
+  fallback: url("../assets/VideoImage/banner.png");
+}
+.floating {
+  animation: floating 4s ease-in-out 0s infinite;
+}
+
+@keyframes floating {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+/*__________________slider characters */
+.story #characters {
+  flex-direction: column;
+  max-width: 100%;
+  overflow: hidden;
+}
+.story #characters div {
+  flex: none;
+}
+
+#characters h3 {
+  text-align: left;
+  background-position: left;
+  padding: 1em;
+}
+
+.swipper-wrapper {
+  transition-duration: 50ms !important;
+}
+
+/*_________________________nuages & place*/
+#place {
+  background-image: url("../assets/VideoImage/P.png") !important;
+  margin-top: -50px;
+}
+#place div {
+  margin-top: 170px;
+}
+#place .bigCloud {
+  position: relative;
+  left: 950px;
+  bottom: 420px;
+  filter: blur(10px);
+  z-index: 1;
+  will-change: transform;
+  transition: transform 140ms linear;
+}
+#place .littleCloud {
+  position: relative;
+  left: 730px;
+  bottom: 360px;
+  filter: blur(12px);
+  will-change: transform;
+  transition: transform 140ms linear;
+}
+
+#event {
+  position: relative;
+  overflow: visible;
+  padding: 8rem 0 12rem;
+  /* Coupe les fleurs sur les bords gauche/droite (sans couper verticalement) */
+  clip-path: inset(-1000px 0 -1000px 0);
+}
+#event::before {
+  content: url("../../foce/assets/images/Sunflower.png");
+  position: absolute;
+  left: 102px;
+  top: 0;
+}
+#event::after {
+  content: url("../../foce/assets/images/orchid.png");
+  position: absolute;
+  right: -86px; /* ~173px / 2 */
+  margin-top: -450px;
+}
+
+/* Rythme vertical entre Studio -> Oscars -> Footer */
+#event {
+  margin-top: clamp(1rem, 3vw, 2rem);
+}
+
+.site-footer {
+  padding-top: 15rem;
+  padding-bottom: 2rem;
+  /* On garde le hibiscus du footer coupé en bas (comme le thème parent) */
+  overflow: hidden;
+}
+
+/* Ajuste le hibiscus pour qu'il soit entier en haut, mais reste coupé en bas */
+.site-footer ul::after {
+  bottom: -30.5em;
+}
+
+/* =========================
+   OSCARS
+========================= */
+.oscars {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 3vw, 2.5rem);
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: clamp(1.5rem, 4vw, 4rem);
+  position: relative;
+  z-index: 2;
+}
+.oscars h3 {
+  background-image: url("../assets/VideoImage/orange_characters_bg.png");
+  background-repeat: no-repeat;
+  background-size: 100% 125%;
+  background-position: center;
+  width: 100%;
+  max-width: 660px;
+  padding: clamp(2.6rem, 3.6vw, 3.7rem) clamp(2rem, 3.6vw, 4rem);
+  font-size: clamp(1.35rem, 2.1vw, 2rem);
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  text-align: left;
+  text-wrap: balance;
+  color: #fff5e9;
+}
+.oscars img {
+  width: clamp(220px, 18vw, 320px);
+  height: auto;
+  flex-shrink: 0;
+  align-self: center;
+}
+
+/* =========================
+   ROTATION FLEURS
+========================= */
+#event::before,
+#event::after {
+  animation: rotating var(--rotateTime) linear infinite;
+}
+
+/* =========================
+   FOOTER
+========================= */
+.site-footer::before,
+.site-footer::after {
+  display: none;
+}
+
+/* =========================
+   RESPONSIVE OSCARS
+========================= */
+@media screen and (max-width: 768px) {
+  .oscars {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .oscars h3 {
+    max-width: 680px;
+    background-size: cover;
+    padding: 2.5rem 2.25rem;
+  }
+  .oscars img {
+    width: 240px;
+  }
+}
+@media screen and (max-width: 480px) {
+  #event {
+    padding-bottom: 9rem;
+  }
+  .oscars {
+    padding: 0 1rem;
+    gap: 1.25rem;
+  }
+  .oscars h3 {
+    padding: 2rem 1.5rem;
+    border-radius: 16px;
+    font-size: 1.1rem;
+    line-height: 1.35;
+    background-size: cover;
+  }
+  .oscars img {
+    width: 200px;
+  }
+}
+@media screen and (max-width: 920px) {
+  .main-navigation ul a {
+    font-size: 3.5em;
+    margin: 1em auto;
+  }
+  .catsMenu img {
+    width: 15%;
+  }
+  .banner img {
+    width: 65%;
+  }
+  .oscars {
+    flex-direction: column;
+    z-index: 2;
+  }
+  #event::before {
+    display: none;
+  }
+}
+@media screen and (min-width: 700px) {
+  .background-video {
+    display: block;
+  }
+  .banner {
+    background-image: none;
+  }
+}
+@media screen and (max-width: 700px) {
+  .main-navigation ul a {
+    font-size: 2.5em;
+    margin: 1.4em auto;
+  }
+  .fullMenu img {
+    width: 40% !important;
+  }
+  .flowersMenu img {
+    opacity: 0.5;
+  }
+  .banner img {
+    width: 80%;
+  }
+  h3 {
+    font-size: 2.6em !important;
+  }
+  .oscars h3 {
+    font-size: 1.5em !important;
+  }
+  #event::after {
+    display: none;
+  }
+}
+@media screen and (max-width: 400px) {
+  .main-navigation ul a {
+    font-size: 2em;
+    margin: 0.4em auto;
+  }
+  h1 {
+    padding-left: 1em !important;
+  }
+  h2 {
+    font-size: 2em !important;
+  }
+  h3 {
+    font-size: 1.6em !important;
+  }
+  .oscars h3 {
+    font-size: 1em !important;
+  }
+  #event::before,
+  #event::after {
+    display: none;
+  }
+}/*# sourceMappingURL=style.css.map */

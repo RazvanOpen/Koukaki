@@ -1,0 +1,96 @@
+// $breakpoint__laptop: 1192px;
+// $breakpoint__tablet: 1040px;
+// $breakpoint__small_tablet: 920px;
+// $breakpoint__large_phone: 700px;
+
+
+@media screen and (max-width: #{$breakpoint__small_tablet}) {
+	.main-navigation ul a {
+		font-size: 3.5em;
+		margin: 1em auto;
+	}
+	.catsMenu img {
+		width:15%;
+	}
+
+	.banner img {
+		width: 65%;
+	}
+
+	.oscars {
+		flex-direction: column;
+		z-index: 2;
+	}
+	#event::before {
+	display: none;
+	}
+} 
+
+
+@media screen and (min-width: #{$breakpoint__large_phone}){
+	.background-video {
+		display: block;
+	}
+
+	.banner {
+		background-image: none;
+	}
+}
+
+@media screen and (max-width: #{$breakpoint__large_phone}) {
+    .main-navigation ul a {
+		font-size: 2.5em;
+		margin: 1.4em auto;
+	}
+	.fullMenu img{
+		width: 40% !important;
+	}
+	.flowersMenu img {
+		opacity: 0.5;
+	}
+
+	.banner img {
+		width: 80%;
+	}
+
+	h3{
+		font-size: 2.6em !important;
+	}
+
+	.oscars {
+		& h3 {
+			font-size:1.5em  !important;
+		}
+	}
+
+	#event::after {
+	display: none;
+	}
+} 
+
+@media screen and (max-width:400px) {
+    .main-navigation ul a {
+		font-size: 2em;
+		margin: 0.4em auto;
+	}
+
+	h1{
+		padding-left: 1em !important;
+	}
+    h2{
+		font-size: 2em !important;
+	}
+	h3{
+		font-size: 1.6em  !important;
+	}
+	
+	.oscars h3 {
+			font-size: 1em !important;
+	} 
+	#event::before,
+	#event::after {
+		display: none;
+	}
+}
+
+

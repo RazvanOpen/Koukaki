@@ -1,0 +1,145 @@
+#event {
+    position: relative;
+    overflow: visible;
+    padding: 8rem 0 12rem;
+    /* Coupe les fleurs sur les bords gauche/droite (sans couper verticalement) */
+    -webkit-clip-path: inset(-1000px 0 -1000px 0);
+    clip-path: inset(-1000px 0 -1000px 0);
+      
+
+    &::before {
+        content: url("../../foce/assets/images/Sunflower.png");
+        position: absolute;
+        left: 102px;
+        top: 0;
+    }
+
+    &::after {
+        content: url("../../foce/assets/images/orchid.png");
+        position: absolute;
+        right: -86px; /* ~173px / 2 */
+        margin-top: -450px;
+    }
+}
+
+/* Rythme vertical entre Studio -> Oscars -> Footer */
+#event {
+    margin-top: clamp(1rem, 3vw, 2rem);
+}
+
+.site-footer {
+    padding-top: 15rem;
+    padding-bottom: 2rem;
+    /* On garde le hibiscus du footer coupé en bas (comme le thème parent) */
+    overflow: hidden;
+}
+
+/* Ajuste le hibiscus pour qu'il soit entier en haut, mais reste coupé en bas */
+.site-footer ul::after {
+    bottom: -30.5em;
+}
+
+/* =========================
+   OSCARS
+========================= */
+
+.oscars {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 clamp(1.25rem, 3vw, 2.5rem);
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    gap: clamp(1.5rem, 4vw, 4rem);
+
+    position: relative;
+    z-index: 2;
+
+    h3 {
+        background-image: url("../assets/VideoImage/orange_characters_bg.png");
+        background-repeat: no-repeat;
+        background-size: 100% 125%;
+        background-position: center;
+        
+
+        width: 100%;
+        max-width: 660px;
+
+        padding: clamp(2.6rem, 3.6vw, 3.7rem) clamp(2rem, 3.6vw, 4rem);
+
+        font-size: clamp(1.35rem, 2.1vw, 2rem);
+        line-height: 1.35;
+        letter-spacing: 0.01em;
+        border-radius: 18px;
+        display: flex;
+        align-items: center;
+        text-align: left;
+        text-wrap: balance;
+
+        color: #fff5e9;
+    }
+
+    img {
+        width: clamp(220px, 18vw, 320px);
+        height: auto;
+        flex-shrink: 0;
+        align-self: center;
+    }
+}
+
+/* =========================
+   ROTATION FLEURS
+========================= */
+
+#event::before,
+#event::after {
+    @include rotate_infinite(var(--rotateTime));
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.site-footer::before,
+.site-footer::after {
+    display: none;
+}
+
+/* =========================
+   RESPONSIVE OSCARS
+========================= */
+@media screen and (max-width: 768px) {
+    .oscars {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .oscars h3 {
+        max-width: 680px;
+        background-size: cover;
+        padding: 2.5rem 2.25rem;
+    }
+    .oscars img {
+        width: 240px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #event {
+        padding-bottom: 9rem;
+    }
+    .oscars {
+        padding: 0 1rem;
+        gap: 1.25rem;
+    }
+    .oscars h3 {
+        padding: 2rem 1.5rem;
+        border-radius: 16px;
+        font-size: 1.1rem;
+        line-height: 1.35;
+        background-size: cover;
+    }
+    .oscars img {
+        width: 200px;
+    }
+}

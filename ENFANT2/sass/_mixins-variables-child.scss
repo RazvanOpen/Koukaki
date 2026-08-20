@@ -1,0 +1,53 @@
+// variables W
+$color__bg:#FFF5E9;
+$colorOrange: #DC8433;
+$rotateTime: 45s;
+
+:root{
+    --rotateTime: 45s;
+}
+
+@mixin Shadow($color){
+    text-shadow:  #{$color} 1px 1px 10px;
+}
+@mixin Position($position, $top, $right, $bottom, $left){
+    position: $position;
+    top: $top;
+    right: $right;
+    bottom: $bottom;
+    left: $left;
+}
+
+
+
+//_____________________________ FADE IN sections
+$fade_in_time: 2s;
+$fade_in_Y: 100px;
+
+@mixin fade_in($animationName, $yValue) {
+    @keyframes #{$animationName} {
+        from {
+            opacity: 0;
+            transform: translateY(#{$yValue});
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    animation: #{$animationName} ease $fade_in_time;
+}
+
+//_________________ rotate flowers
+@keyframes rotating {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@mixin rotate_infinite($rotate_Time) {
+    animation: rotating $rotate_Time linear infinite;
+}

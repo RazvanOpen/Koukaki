@@ -1,0 +1,230 @@
+
+h3 {
+    @include Shadow($colorOrange)
+}
+
+/* =========================
+   TITRES DE SECTIONS (uniformisés)
+========================= */
+html.js .section-title > span {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+    transition:
+        opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
+        transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+}
+
+html.js .section-title.is-inview > span {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    transition-delay: 180ms;
+}
+
+/*_______________________FADE IN sections*/
+
+.banner,
+.site p {
+    @include fade_in('fadeInSlideDown',(-$fade_in_Y));
+}
+
+.fadeInDbUp,
+.banner .logo img {
+    @include fade_in('fadeInSlideDoubleUp', calc(2 * $fade_in_Y));
+}
+
+/* Fade-in des sections au chargement (demandé par le brief) */
+html.js .site-main > section {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0);
+}
+
+html.js.is-loaded .site-main > section {
+    animation: sectionIn 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+html.js.is-loaded .site-main > section:nth-of-type(1) { animation-delay: 0ms; }
+html.js.is-loaded .site-main > section:nth-of-type(2) { animation-delay: 140ms; }
+html.js.is-loaded .site-main > section:nth-of-type(3) { animation-delay: 280ms; }
+html.js.is-loaded .site-main > section:nth-of-type(4) { animation-delay: 420ms; }
+
+@keyframes sectionIn {
+    from { opacity: 0; transform: translate3d(0, 24px, 0); }
+    to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html.js .site-main > section {
+        opacity: 1;
+        transform: none;
+    }
+    html.js.is-loaded .site-main > section {
+        animation: none;
+    }
+}
+
+/* ___________________FLOWERS*/
+//ajustement flex pour overflow
+#studio {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding-top: clamp(3rem, 6vw, 5rem);
+    padding-bottom: clamp(2rem, 5vw, 4rem);
+    & h2{
+        justify-content: center;
+        display: flex;
+    }
+}
+
+/* Grande fleur violette en bas à droite (coupée au bord, comme maquette) 
+#studio::after{
+    content: "";
+    position: absolute;
+    right: -85px;
+    bottom: -85px;
+    width: 170px;
+    height: 170px;
+    background: url("../assets/VideoImage/random_flower.png") no-repeat center / contain;
+    pointer-events: none;
+    z-index: 0;
+    @include rotate_infinite (var(--rotateTime)) ;
+    transform-origin: center;
+}
+*/
+#studio{
+    position: relative;
+}
+#studio > *{
+    position: relative;
+    z-index: 1;
+}
+
+/* Fleurs de Studio : coupées verticalement sur les bords (comme maquette) */
+#studio h2{
+    position: relative;
+    overflow: hidden; /* coupe les pseudo-éléments au bord du bloc */
+}
+#studio h2::before{
+    left: -102px; /* ~ 203px / 2 */
+    top: 0;
+}
+#studio h2::after{
+    right: 12px; /* entièrement visible (comme maquette) */
+    top: 1.2em;
+}
+
+/*contraste background/fleurs blanches*/
+.story h2::after,
+#event::before,
+.site-footer::before {
+    filter: drop-shadow(0 0 0.15rem darken($color__bg,10%));
+}
+
+/*_________________ rotate flowers*/
+.story h2::after,
+.story__article::after,
+#studio h2::before,
+#studio h2::after,
+.site-footer::before,
+.site-footer::after {
+    @include rotate_infinite (var(--rotateTime)) ;
+    line-height: 0px;
+    transform-origin: center;
+}
+
+.site-footer ul::after {
+    @include rotate_infinite(80s);
+}
+
+//ajustement (layout story)
+.story h2{
+    display: flex;
+    justify-content: center;
+}
+
+/*_________________________Banner | video*/
+.banner{
+    position: relative;
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include Position(absolute, 0, 0, 0, 0);
+    z-index: 1;
+}
+
+.background-video {
+    object-fit: cover;
+    @include Position(relative, 0, 0, 0, 0);
+    z-index: -1;
+    list-style: fallback-video;
+    display: none;
+}
+
+@counter-style fallback-video {
+        fallback: url("../assets/VideoImage/banner.png" )
+}
+
+.floating{
+    animation: floating 4s ease-in-out 0s infinite
+}
+
+@keyframes floating{
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }  
+    100% {
+        transform: translateY(0px);
+    }
+}
+/*__________________slider characters */
+
+.story #characters {
+    flex-direction: column;
+    max-width: 100%;
+    overflow: hidden;
+    & div{
+        flex: none;
+    }
+}
+#characters h3 {
+    text-align: left;
+    background-position: left;
+    padding: 1em;
+}
+.swipper-wrapper {
+    transition-duration: 50ms !important;
+}
+
+/*_________________________nuages & place*/
+
+#place {
+    background-image: url('../assets/VideoImage/P.png') !important;
+    margin-top: -50px;
+    & div {
+        margin-top: 170px;
+    }
+    & .bigCloud {
+        position: relative;
+        left: 950px;        
+        bottom:420px;
+        filter: blur(10px);
+        z-index: 1;
+        will-change: transform;
+        transition: transform 140ms linear;
+    }
+    & .littleCloud {
+        position: relative;
+        left: 730px;      
+        bottom:360px;
+        filter: blur(12px);
+        will-change: transform;
+        transition: transform 140ms linear;
+    }
+}
